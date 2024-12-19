@@ -18,6 +18,7 @@ phases:
       - docker tag $REPO_URI:latest $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION
   post_build:
     commands:
+      - printf '[{"name":"deployment-test","imageUri":"%s"}]' $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION > imagedefinitions.json
       - echo Pushing the Docker image to ECR...
       - docker push $REPO_URI:latest
       - docker push $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION
