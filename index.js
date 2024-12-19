@@ -13,7 +13,7 @@ app.get("/test", (req, res) => {
 
 app.get("/purpose", (req, res) => {
   res.json({
-    status: "this is a test for ci/cd pipeline and its successfull",
+    status: "this is a test for ci/cd pipeline and its successfull and this time i have made it myself",
   });
 });
 
