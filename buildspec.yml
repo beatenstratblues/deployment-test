@@ -6,9 +6,9 @@ phases:
       - echo Logging in to Docker Hub...
       - docker login -u jatinsinghbrevi -p jatinsinghshinobi
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 741448935727.dkr.ecr.ap-south-1.amazonaws.com
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 349445303285.dkr.ecr.ap-south-1.amazonaws.com
       - echo Starting pre-build phase...
-      - REPO_URI=741448935727.dkr.ecr.ap-south-1.amazonaws.com/ci/cd-testing
+      - REPO_URI=349445303285.dkr.ecr.ap-south-1.amazonaws.com/test-application-staging-repo
       - echo Repository URI is $REPO_URI
   build:
     commands:
@@ -18,7 +18,7 @@ phases:
       - docker tag $REPO_URI:latest $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION
   post_build:
     commands:
-      - printf '[{"name":"test","imageUri":"%s"}]' $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION > imagedefinitions.json
+      - printf '[{"name":"test_task","imageUri":"%s"}]' $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION > imagedefinitions.json
       - echo Pushing the Docker image to ECR...
       - docker push $REPO_URI:latest
       - docker push $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION
