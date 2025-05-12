@@ -22,10 +22,8 @@ phases:
       - echo Pushing the Docker image to ECR...
       - docker push $REPO_URI:latest
       - docker push $REPO_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION
-  deploy:
-      commands:
-        - echo "Deploying to ECS..."
-        - aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment
+      - echo "Deploying to ECS..."
+      - aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment
 artifacts:
   files:
     - '**/*'
